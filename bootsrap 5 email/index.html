@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin: auto;
+      }
+
+      form input,
+      form textarea,
+      form button {
+        padding: 20px;
+        margin-bottom: 20px;
+        outline: none;
+        border: none;
+        background-color: aliceblue;
+      }
+
+      form button {
+        background-color: whitesmoke;
+        cursor: pointer;
+      }
+
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1><strong>Contact us</strong></h1>
+    <form class="contact_form" id="form1" action="#">
+      <input class="name" type="text" placeholder="name" />
+      <input class="Email" type="text" placeholder="Email" />
+      <textarea
+        class="msg"
+        cols="5"
+        rows="5"
+        placeholder="your message"
+      ></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+      console.log("init");
+      function sendMsg(e) {
+        e.preventDefault();
+        (name = document.querySelector(".name").value),
+          (email = document.querySelector(".Email").value),
+          (msg = document.querySelector(".msg").value);
+        const obj = {
+          name,
+          email,
+          msg,
+        };
+        console.log("obj", obj);
+        Email.send({
+          Host: "smtp.elasticemail.com",
+          Username: "bndazbvu.me12@gmail.com",
+          Password: "7C7E703680E6D4641A77C89ED23A7D1E49CB",
+          To: email,
+          From: "bndazbvu.me12@gmail.com",
+          Subject: name,
+          Body: msg,
+        }).then((message) => alert(message));
+      }
+      const form = document.querySelector(".contact_form");
+
+      const form1 = document.getElementById("form1");
+      console.log("form1", form1);
+      console.log("form", form);
+
+      form.addEventListener("submit", sendMsg);
+    </script>
+  </body>
+</html>
